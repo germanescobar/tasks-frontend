@@ -1,24 +1,24 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import axios from "./axios";
-import { loadTasks } from './actionCreators'
+import { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import axios from './axios'
+import { loadTasks, saveTask as saveTaskDispatcher } from './actionCreators'
 
 function Tasks() {
-  const tasks = useSelector(state => state.tasks)
+  const tasks = useSelector((state) => state.tasks)
   const [state, setState] = useState({
-    title: "",
-  });
+    title: '',
+  })
 
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(loadTasks())
-  }, [dispatch]);
+  }, [dispatch])
 
   function updateTitle(e) {
     setState({
       ...state,
       title: e.target.value,
-    });
+    })
   }
 
   /*async function saveTask() {
@@ -37,23 +37,13 @@ function Tasks() {
 
   // 1. Agregar la lógica al reducer
   // 2. Crear el actionCreator
-  // 3. Hacer el dispatch desde el saveTask 
+  // 3. Hacer el dispatch desde el saveTask
   function saveTask() {
-    axios
-      .post("http://localhost:3001/tasks", {
-        title: state.title,
-      })
-      .then((response) => {
-        // setTasks((tasks) => tasks.concat(response.data));
-        setState((state) => ({
-          ...state,
-          title: "",
-        }));
-      });
+    dispatch(saveTaskDispatcher(state.title))
   }
 
   function deleteTask(e, task) {
-    e.preventDefault(); // prevenimos el comportamiento por defecto
+    e.preventDefault() // prevenimos el comportamiento por defecto
     // axios
     //   .delete(`http://localhost:3001/tasks/${task.id}`)
     //   .then(() => setTasks(tasks.filter((t) => t.id !== task.id)))
@@ -74,7 +64,7 @@ function Tasks() {
         //     +task.id === t.id ? { ...task, completed: !task.completed } : t
         //   )
         // );
-      });
+      })
   }
 
   return (
@@ -85,11 +75,11 @@ function Tasks() {
           tasks.map((task) => (
             <li key={task.id}>
               <span
-                className={task.completed ? "done" : null}
+                className={task.completed ? 'done' : null}
                 onClick={() => toggleTask(task)}
               >
                 {task.title}
-              </span>{" "}
+              </span>{' '}
               <a href="#" onClick={(e) => deleteTask(e, task)}>
                 x
               </a>
@@ -99,7 +89,7 @@ function Tasks() {
       <input type="text" value={state.title} onChange={updateTitle} />
       <button onClick={saveTask}>Crear Tarea</button>
     </div>
-  );
+  )
 }
 
 export default Tasks

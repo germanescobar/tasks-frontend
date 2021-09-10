@@ -1,9 +1,9 @@
-import  { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import Tasks from './Tasks'
-import Login from './Login'
-import { store } from './store'
-import "./App.css"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import Tasks from "./Tasks";
+import Login from "./Login";
+import { store } from "./store";
+import "./App.css";
 
 export default function App() {
   return (
@@ -17,5 +17,5 @@ export default function App() {
         </Router>
       </div>
     </Provider>
-  )
+  );
 }
