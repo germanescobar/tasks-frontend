@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "./axios";
-import { loadTasks } from './actionCreators'
+import { addTasks, loadTasks } from "./actionCreators";
 
 function Tasks() {
-  const tasks = useSelector(state => state.tasks)
+  const tasks = useSelector(state => state.tasks);
   const [state, setState] = useState({
     title: "",
   });
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(loadTasks())
+    dispatch(loadTasks());
   }, [dispatch]);
 
   function updateTitle(e) {
@@ -37,19 +37,23 @@ function Tasks() {
 
   // 1. Agregar la lógica al reducer
   // 2. Crear el actionCreator
-  // 3. Hacer el dispatch desde el saveTask 
+  // 3. Hacer el dispatch desde el saveTask
+  // function saveTask() {
+  //   axios
+  //     .post("http://localhost:3001/tasks", {
+  //       title: state.title,
+  //     })
+  //     .then((response) => {
+  //       // setTasks((tasks) => tasks.concat(response.data));
+  //       setState((state) => ({
+  //         ...state,
+  //         title: "",
+  //       }));
+  //     });
+  // }
   function saveTask() {
-    axios
-      .post("http://localhost:3001/tasks", {
-        title: state.title,
-      })
-      .then((response) => {
-        // setTasks((tasks) => tasks.concat(response.data));
-        setState((state) => ({
-          ...state,
-          title: "",
-        }));
-      });
+    const { title } = state;
+    dispatch(addTasks(title));
   }
 
   function deleteTask(e, task) {
@@ -82,7 +86,7 @@ function Tasks() {
       <h1>Lista de Tareas</h1>
       <ul className="tasks">
         {tasks.length > 0 &&
-          tasks.map((task) => (
+          tasks.map(task => (
             <li key={task.id}>
               <span
                 className={task.completed ? "done" : null}
@@ -90,7 +94,7 @@ function Tasks() {
               >
                 {task.title}
               </span>{" "}
-              <a href="#" onClick={(e) => deleteTask(e, task)}>
+              <a href="#" onClick={e => deleteTask(e, task)}>
                 x
               </a>
             </li>
@@ -102,4 +106,4 @@ function Tasks() {
   );
 }
 
-export default Tasks
+export default Tasks;
