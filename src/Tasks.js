@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "./axios";
-import { loadTasks } from './actionCreators'
+import { loadTasks, saveTask } from "./actionCreators";
 
 function Tasks() {
-  const tasks = useSelector(state => state.tasks)
+  const tasks = useSelector((state) => state.tasks);
   const [state, setState] = useState({
     title: "",
   });
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(loadTasks())
+    dispatch(loadTasks());
+    dispatch(saveTask(state));
   }, [dispatch]);
 
   function updateTitle(e) {
@@ -37,20 +38,20 @@ function Tasks() {
 
   // 1. Agregar la lógica al reducer
   // 2. Crear el actionCreator
-  // 3. Hacer el dispatch desde el saveTask 
-  function saveTask() {
-    axios
-      .post("http://localhost:3001/tasks", {
-        title: state.title,
-      })
-      .then((response) => {
-        // setTasks((tasks) => tasks.concat(response.data));
-        setState((state) => ({
-          ...state,
-          title: "",
-        }));
-      });
-  }
+  // 3. Hacer el dispatch desde el saveTask
+  // function saveTask() {
+  //   axios
+  //     .post("http://localhost:3001/tasks", {
+  //       title: state.title,
+  //     })
+  //     .then((response) => {
+  //       setTasks((tasks) => tasks.concat(response.data));
+  //       setState((state) => ({
+  //         ...state,
+  //         title: "",
+  //       }));
+  //     });
+  // }
 
   function deleteTask(e, task) {
     e.preventDefault(); // prevenimos el comportamiento por defecto
@@ -102,4 +103,4 @@ function Tasks() {
   );
 }
 
-export default Tasks
+export default Tasks;
