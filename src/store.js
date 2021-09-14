@@ -1,16 +1,24 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
-import { LOGIN, LOAD_TASKS, ERROR } from './actions'
+import { LOGIN, LOGOUT, LOAD_TASKS, ERROR, LOADING, AUTHENTICATED, NOT_AUTHENTICATED } from './constants'
 
 const initialState = {
-  user: null,
+  auth: {
+    status: LOADING,
+    user: null,
+  },
   tasks: [],
   error: null
 }
 
 const reducer = function(state=initialState, action) {
   if (action.type === LOGIN) {
-    return { ...state, user: action.payload }
+    return { ...state, auth: { 
+      status: AUTHENTICATED,
+      user: action.payload 
+    }}
+  } else if (action.type === LOGOUT) {
+    return { ...state, auth: { status: NOT_AUTHENTICATED, user: null } }
   } else if (action.type === ERROR) {
     const error = action.payload
     let msg = "Encontramos un error desconocido, intena nuevamente o comu ..."
@@ -18,8 +26,7 @@ const reducer = function(state=initialState, action) {
       msg = "Encontra ..."
     } else if (error.response) {
       if (error.response.status === 401) {
-        console.log("Data", error.response.data)
-        msg = error.response.data.error
+        msg = error.response.data.message
       }
     }
     return { ...state, error: msg }

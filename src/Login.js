@@ -27,7 +27,7 @@ function Login() {
   return (
     <form onSubmit={login}>
       <input type="text" name="email" value={state.email} onChange={handleChange} />
-      <input type="text" name="password" value={state.password} onChange={handleChange} />
+      <input type="password" name="password" value={state.password} onChange={handleChange} />
       <button type="submit">Ingresar</button>
     </form>
   )
