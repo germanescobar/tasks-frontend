@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Tasks from './Tasks'
 import Login from './Login'
 import Register from './Register'
+import UploadImage from './UploadImage'
 import PrivateRoute from './PrivateRoute'
 import history from './history'
 import { loadUser } from './actionCreators'
@@ -33,6 +34,7 @@ export default function App() {
           <PrivateRoute exact path="/" component={Tasks} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/upload" component={UploadImage} />
         </Switch>
       </Router>
 
