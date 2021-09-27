@@ -1,8 +1,9 @@
-/* eslint-disable no-underscore-dangle */
+/* eslint-disable */
 /* eslint-disable no-debugger */
 /**
  * @author Cristian Moreno <khriztianmoreno@gmail.com>
  */
+import { createActions } from 'redux-actions';
 
 import {
   getTodos,
@@ -21,13 +22,36 @@ import {
   HIDE_LOADER,
 } from '../types';
 
-export const updateCurrent = (val) => ({ type: UPDATE_CURRENT, payload: val });
-export const loadTodos = (todos) => ({ type: LOAD_TODOS, payload: todos });
-export const addTodo = (todo) => ({ type: ADD_TODO, payload: todo });
-export const replaceTodo = (todo) => ({ type: REPLACE_TODO, payload: todo });
-export const removeTodo = (id) => ({ type: REMOVE_TODO, payload: id });
-export const showLoader = () => ({ type: SHOW_LOADER, payload: true });
-export const hideLoader = () => ({ type: HIDE_LOADER, payload: false });
+// FSA - FLUX STANDARD ACTION
+// {
+//   type: '',
+//   payload: '',
+//   error: true,
+//   meta: {},
+// }
+
+const fixCase = (str) =>
+  `${str.slice(0, 1).toUpperCase()}${str.slice(1).toLowerCase()}`;
+
+export const {
+  updateCurrent,
+  loadTodos,
+  addTodo,
+  replaceTodo,
+  removeTodo,
+  showLoader,
+  hideLoader,
+} = createActions(
+  {
+    [UPDATE_CURRENT]: fixCase,
+    [SHOW_LOADER]: () => true,
+    [HIDE_LOADER]: () => false,
+    [ADD_TODO]: [(val) => val, (_, title) => ({ title })],
+  },
+  LOAD_TODOS,
+  REPLACE_TODO,
+  REMOVE_TODO
+);
 
 export const fetchTodos = () => async (dispatch) => {
   dispatch(showLoader());
@@ -36,7 +60,7 @@ export const fetchTodos = () => async (dispatch) => {
     const { data } = await getTodos();
     dispatch(loadTodos(data));
   } catch (error) {
-    console.log('Show', error);
+    dispatch(loadTodos(error));
   } finally {
     dispatch(hideLoader());
   }
@@ -49,7 +73,7 @@ export const saveTodo = (title) => async (dispatch) => {
     const res = await createTodo(title);
     dispatch(addTodo(res));
   } catch (error) {
-    console.log('Show', error);
+    dispatch(addTodo(error, title));
   } finally {
     dispatch(hideLoader());
   }

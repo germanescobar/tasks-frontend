@@ -4,8 +4,8 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
 export const getTodos = () =>
   fetch(`${baseUrl}/api/tasks`).then((res) => res.json());
 // .then(() => {
-//   throw new Error('Boom!')
-// })
+//   throw new Error('Boom!');
+// });
 
 export const createTodo = (title) =>
   fetch(`${baseUrl}/api/tasks`, {
@@ -17,8 +17,8 @@ export const createTodo = (title) =>
     body: JSON.stringify({ title, isComplete: false }),
   }).then((res) => res.json());
 // .then(() => {
-//   throw new Error('Boom!')
-// })
+//   throw new Error('Boom!');
+// });
 
 export const updateTodo = (todo) =>
   fetch(`${baseUrl}/api/tasks/${todo._id}`, {

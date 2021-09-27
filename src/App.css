@@ -25,14 +25,16 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
 .Todo-App {
-  padding-top:40px;
   display: inline-block;
+  padding-top: 40px;
+  position: relative;
   text-align: left;
 }
 
@@ -49,15 +51,15 @@ li {
 }
 
 .message {
-  background-color:#61DAFB;
-  color:white;
-  border: solid 1px #61DAFB;
+  background-color: #fb7861;
+  border: solid 1px #fb7861;
+  color: white;
+  left: 50%;
+  margin-left: -150px;
   position: absolute;
   text-align: center;
-  width:300px;
-  left: 50%;
-  margin-left:-150px;
-  top: 200px;
+  top: 0;
+  width: 300px;
 }
 
 li span.delete-item {
@@ -68,9 +70,9 @@ span.delete-item button {
   background: none;
   border: none;
   font-size: 1em;
-  font-weight:bold;
+  font-weight: bold;
   text-decoration: none;
-  color:red;
+  color: red;
 }
 
 li:hover span.delete-item {
@@ -84,9 +86,9 @@ a {
 
 .loader {
   align: center;
-  width:50px;
+  width: 50px;
   left: 50%;
-  margin-left:-25px;
+  margin-left: -25px;
   top: 195px;
-  position:absolute;
+  position: absolute;
 }
