@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { TOKEN } from './constants';
 
 let baseURL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001';
 if (process.env.NODE_ENV === 'test') {
@@ -9,7 +8,7 @@ if (process.env.NODE_ENV === 'test') {
 const customAxios = axios.create({
   baseURL,
   headers: {
-    Authorization: `Bearer ${localStorage.getItem(TOKEN)}`,
+    Authorization: `Bearer ${localStorage.getItem('TOKEN')}`,
   },
 });
 

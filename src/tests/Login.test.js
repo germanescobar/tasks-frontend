@@ -2,9 +2,8 @@
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { rest } from 'msw';
-import history from '../history';
+
 import createStore from '../store';
-import { TOKEN } from '../constants';
 import App from '../App';
 import server from './server';
 
@@ -16,8 +15,6 @@ beforeEach(() => {
 });
 
 test('allows user to login', async () => {
-  history.push('/login');
-
   // ejecución
   render(
     <Provider store={store}>
@@ -38,7 +35,7 @@ test('allows user to login', async () => {
 
   await waitFor(() => {
     expect(screen.getAllByText(/lista de tareas/i).length).toBeGreaterThan(0);
-    expect(localStorage.getItem(TOKEN)).not.toBeFalsy();
+    expect(localStorage.getItem('TOKEN')).not.toBeFalsy();
   });
 });
 
@@ -58,8 +55,6 @@ test('shows error when user enters invalid credentials', async () => {
     )
   );
 
-  history.push('/login');
-
   render(
     <Provider store={store}>
       <App />
@@ -78,5 +73,5 @@ test('shows error when user enters invalid credentials', async () => {
   expect(
     await screen.findByText(/credenciales inválidas/i)
   ).toBeInTheDocument();
-  expect(localStorage.getItem(TOKEN)).toBeFalsy();
+  expect(localStorage.getItem('TOKEN')).toBeFalsy();
 });

@@ -1,8 +1,94 @@
-.done {
-  text-decoration: line-through;
+.App {
+  text-align: center;
 }
 
-.alert-error {
-  color: red;
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 10vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.Todo-App {
+  display: inline-block;
+  padding-top: 40px;
+  position: relative;
+  text-align: left;
+}
+
+input {
+  font-size: 20px
+}
+
+ul {
+  padding: 0px;
+}
+
+li {
+  list-style-type: none;
+}
+
+.message {
+  background-color: #fb7861;
+  border: solid 1px #fb7861;
+  color: white;
+  left: 50%;
+  margin-left: -150px;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 300px;
+}
+
+li span.delete-item {
+  visibility: hidden;
+}
+
+span.delete-item button {
+  background: none;
+  border: none;
+  font-size: 1em;
   font-weight: bold;
+  text-decoration: none;
+  color: red;
+}
+
+li:hover span.delete-item {
+  visibility: visible;
+}
+
+a {
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.loader {
+  align: center;
+  width: 50px;
+  left: 50%;
+  margin-left: -25px;
+  top: 195px;
+  position: absolute;
 }
