@@ -8,6 +8,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
+    "cypress": "^8.5.0",
     "history": "^5.0.1",
     "msw": "^0.35.0",
     "prop-types": "^15.7.2",
@@ -32,7 +33,8 @@
     "lint": "eslint --fix --ext .js,.jsx ",
     "format": "prettier -w .",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "cypress:open": "cypress open"
   },
   "eslintConfig": {
     "extends": [
@@ -70,9 +72,11 @@
     "@storybook/preset-create-react-app": "^3.2.0",
     "@storybook/react": "^6.3.8",
     "babel-loader": "8.1.0",
+    "cypress-xpath": "^1.6.2",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-jest": "^24.4.2",
     "eslint-plugin-jsx-a11y": "^6.4.1",

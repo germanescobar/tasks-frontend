@@ -3,6 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
     'jest/globals': true,
+    'cypress/globals': true,
   },
   extends: ['prettier', 'airbnb'],
   parserOptions: {
@@ -12,7 +13,7 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: ['prettier', 'testing-library', 'jest'],
+  plugins: ['prettier', 'testing-library', 'jest', 'cypress'],
   rules: {
     'no-confusing-arrow': [
       'off',
