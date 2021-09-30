@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -7,7 +8,9 @@ import Message from './components/Message';
 import Footer from './components/Footer';
 import Loader from './components/Loader';
 import UploadImage from './components/UploadImage';
+import AuthVerified from './components/AuthVerified';
 import Card from './components/Card';
+import ImageCloud from './components/ImageCloud';
 
 import logo from './logo.svg';
 import './App.css';
@@ -26,11 +29,14 @@ const App = () => (
         <TodoForm />
 
         <Switch>
-          <Route path="/:filter?" render={RenderView} />
+          <Route exact path="/:filter?" render={RenderView} />
+          <Route exact path="/verified/:token" component={AuthVerified} />
           <Route exact path="/upload" component={UploadImage} />
           <Route exact path="/card" component={Card} />
         </Switch>
         <Footer />
+        <br />
+        {/* <ImageCloud /> */}
       </div>
     </BrowserRouter>
   </div>
