@@ -3,7 +3,10 @@
  * @author Cristian Moreno <khriztianmoreno@gmail.com>
  */
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import {
+  // useDispatch,
+  useSelector,
+} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import {
@@ -11,28 +14,31 @@ import {
   toggleTodo,
   deleteTodo,
   getVisibleTodos,
-} from '../store/actions';
+} from '../state/actions';
+
+import { useTodoDispatch, useTodoState } from '../state/store';
 
 import TodoItem from './TodoItem';
 
 const TodoList = (props) => {
-  const todos =
-    useSelector((state) => getVisibleTodos(state.todos, props.filter)) || [];
+  const { todos = [] } = useTodoState();
 
-  const dispatch = useDispatch();
+  const dispatch = useTodoDispatch();
 
   const onToggleTodo = (id) => {
-    dispatch(toggleTodo(id));
-    dispatch(fetchTodos());
+    toggleTodo(dispatch, id, todos);
+    fetchTodos(dispatch);
+    // dispatch(toggleTodo(id));
+    // dispatch(fetchTodos());
   };
 
   const onDeleteTodo = (id) => {
-    dispatch(deleteTodo(id));
-    dispatch(fetchTodos());
+    // dispatch(deleteTodo(id));
+    // dispatch(fetchTodos());
   };
 
   useEffect(() => {
-    dispatch(fetchTodos());
+    fetchTodos(dispatch);
   }, [dispatch]);
 
   return (

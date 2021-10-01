@@ -8,6 +8,8 @@ import store from './store';
 import MESSAGES from './messages';
 import { flattenMessages } from './utils';
 
+import { TodosProvider } from './state/store';
+
 import './index.css';
 
 const locale =
@@ -20,7 +22,9 @@ const Root = (
   <React.StrictMode>
     <IntlProvider locale={locale} messages={flattenMessages(MESSAGES[locale])}>
       <Provider store={store()}>
-        <App />
+        <TodosProvider>
+          <App />
+        </TodosProvider>
       </Provider>
     </IntlProvider>
   </React.StrictMode>
