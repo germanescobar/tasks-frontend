@@ -1,28 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { IntlProvider } from 'react-intl';
+import { Auth0Provider } from '@auth0/auth0-react';
 
 import App from './App';
 import store from './store';
-import MESSAGES from './messages';
-import { flattenMessages } from './utils';
 
 import './index.css';
 
-const locale =
-  (navigator.languages && navigator.languages[0]) ||
-  navigator.language ||
-  navigator.userLanguage ||
-  'en-US';
-
 const Root = (
   <React.StrictMode>
-    <IntlProvider locale={locale} messages={flattenMessages(MESSAGES[locale])}>
-      <Provider store={store()}>
+    <Provider store={store()}>
+      <Auth0Provider
+        domain="khriztianmoreno.auth0.com"
+        clientId="9XKzaGgxJeCtxCrXEdk6Y9sYIgflpv7a"
+        redirectUri={window.location.origin}
+      >
         <App />
-      </Provider>
-    </IntlProvider>
+      </Auth0Provider>
+    </Provider>
   </React.StrictMode>
 );
 
